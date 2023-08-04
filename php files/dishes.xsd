@@ -6,7 +6,13 @@
         <xsd:element name="dish" maxOccurs="unbounded">
           <xsd:complexType>
             <xsd:sequence>
-              <xsd:element type="xsd:string" name="name"/>
+              <xsd:element name="name">
+                <xsd:simpleType>
+                  <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/> 
+                  </xsd:restriction>
+                </xsd:simpleType>
+              </xsd:element>
               <xsd:element name="category">
                 <xsd:simpleType>
 					<xsd:restriction base="xsd:string">
@@ -16,7 +22,13 @@
 					</xsd:restriction>
 				</xsd:simpleType>
               </xsd:element>
-              <xsd:element type="xsd:float" name="price"/>
+              <xsd:element name="price">
+				<xsd:simpleType>
+					<xsd:restriction base="xsd:float">
+						<xsd:minExclusive value="0"/>
+					</xsd:restriction>
+				</xsd:simpleType>
+			  </xsd:element>
             </xsd:sequence>
           </xsd:complexType>
         </xsd:element>
