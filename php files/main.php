@@ -129,7 +129,7 @@
                         <th>Discount</th>
                     </tr>
                     <?php
-                        $comboQuery = mysqli_query($DBConnect, "SELECT comboName, discount FROM food_combo WHERE isActive='Yes' ORDER BY comboID");
+                        $comboQuery = mysqli_query($DBConnect, "SELECT comboName, discount FROM food_combo ORDER BY comboID");
                         while($fetchCombo = mysqli_fetch_assoc($comboQuery)){
                             echo "<tr>";
                             echo "<td>". $fetchCombo['comboName']. "</td>";
