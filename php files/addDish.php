@@ -54,7 +54,9 @@
                 <label class="form-label fw-bold" for="image">Select an image:</label>
                 <input class="form-control" type="file" name="image"/>
                 <br>
-                <label  class = "form-label fw-bold" for="xmlfile">or Upload an XML File:</label>
+                <p class="text-center display-6">or</p>
+                <br>
+                <label  class = "form-label fw-bold" for="xmlfile">Upload an XML File to Add a New Dish:</label>
                 <input class="form-control" type="file" name="xmlfile"/>
                 <br>
 
