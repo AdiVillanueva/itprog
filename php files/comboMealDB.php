@@ -66,97 +66,108 @@
                     $comboLength = count($combo);
 
                     // check if combo already exists
+                    $counter = 0;
                     for ($i = 1; $i <= $holder; $i++) {
-                        $counter = 0;
-                        $sql = "SELECT * FROM combo_content WHERE comboID=$i";
-                        $result = mysqli_query($conn, $sql); 
-                    
-                        while ($res = mysqli_fetch_assoc($result)) {
-                            for ($j = 0; $j < $comboLength; $j++) {
-                                if ($combo[$j] == $res['foodName']) {
-                                    $counter++;
+                        if($counter < 3){
+                            $counter = 0;
+                            $sql = "SELECT * FROM combo_content WHERE comboID=$i";
+                            $result = mysqli_query($conn, $sql); 
+                        
+                            while ($res = mysqli_fetch_assoc($result)) {
+                                for ($j = 0; $j < $comboLength; $j++) {
+                                    if ($combo[$j] == $res['foodName']) {
+                                        $counter++;
+                                    }
                                 }
                             }
                         }
+                        
                     }
                     
-
-                    if($counter == 3){
-                        echo "<div class = 'col-12 mt-5 p-2 d-flex justify-content-center'>";
-                        echo "<h1 class = 'display-1 mt-5'>". "Combo already exists". "</h1>";
+                    $comboQuery = "SELECT * FROM food_combo WHERE comboName='$comboName'";
+                    $comboRes = mysqli_query($conn, $comboQuery);
+                    if (mysqli_num_rows($comboRes) == 0) {
+                        if($counter == 3){
+                            echo "<div class = 'row'>";
+                              echo "<div class = 'col-12 d-flex justify-content-center mb-5'>";
+                                  echo "<h1 class = 'display-1 text-center mt-5'>". "Combo Already Exists". "</h1>";
+                              echo "</div>";
+                              echo "<div class = 'col-12 d-flex justify-content-center'>";
+                                  echo "<a href = 'addComboMeal.php'";
+                                      echo "<button class ='btn btn-primary'>". "Return to Add Combo Meal". "</button>";
+                                  echo "</a>";
+                                  echo "&nbsp";
+                                  echo "&nbsp";
+                                  echo "&nbsp";
+                                  echo "<a href = 'main.php'";
+                                      echo "<button class ='btn btn-primary'>". "Back to Home". "</button>";
+                                  echo "</a>";
+                              echo "</div>";
+                          echo "</div>";
+                        }
+                        else{
+                            $query = "INSERT INTO food_combo (comboID, comboName, discount, isActive) VALUES($comboID, '$comboName', $discount, 'Yes');";
+                            $result = mysqli_query($conn, $query);
+                            echo "<div class = 'col-12 mb-3 p-2 d-flex justify-content-center'>";
+                            echo "<h1 class = 'display-4'>". "Combo Successfully Added!". "</h1>";
+                            echo "</div>";
+                            
+    
+    
+                            echo "<div class = 'col-12 col-md-3  p-2 d-flex justify-content-center'>";
+                            
+                            echo "<table class = 'table table-respnosive-xl table-sm aligned-table table-light'>";
+                            echo "<th>". "Combo Details". "</th>";
+                            echo "<tr>";
+                            echo "<td class = 'fw-bold'>". "Combo Name: ".$comboName. "</td>";
+                            echo "</tr>"; 
+                            for($i = 0; $i < $comboLength; $i++){
+                                echo "<tr>";
+                                echo "<td class ='fw-bold'>". "Dish: ". $combo[$i]. "</td>";
+                                echo "</tr>";
+                            
+                                $contentQuery = "INSERT INTO combo_content (contentID, comboID, foodName) VALUES($contentid, $comboID, '$combo[$i]');";
+                                $result = mysqli_query($conn, $contentQuery);
+                                $contentid++;
+                            }   
+                            echo "</table>";
+                            echo "</div>";
+    
+                            echo "<div class = 'row'>";
+                            echo "<div class = 'col-12 d-flex justify-content-center'>";
+                                echo "<a href = 'addComboMeal.php'";
+                                    echo "<button class ='btn btn-primary'>". "Add Another Combo Meal". "</button>";
+                                echo "</a>";
+                                echo "&nbsp";
+                                echo "&nbsp";
+                                echo "&nbsp";
+                                echo "<a href = 'main.php'";
+                                    echo "<button class ='btn btn-primary'>". "Back to Home". "</button>";
+                                echo "</a>";
+                            echo "</div>";
                         echo "</div>";
+                        }
                     }
                     else{
-                        $query = "INSERT INTO food_combo (comboID, comboName, discount, isActive) VALUES($comboID, '$comboName', $discount, 'Yes');";
-                        $result = mysqli_query($conn, $query);
-                        echo "<div class = 'col-12 mb-3 p-2 d-flex justify-content-center'>";
-                        echo "<h1 class = 'display-4'>". "Combo Successfully Added!". "</h1>";
-                        echo "</div>";
-                        
-
-
-                        echo "<div class = 'col-12 col-md-3  p-2 d-flex justify-content-center'>";
-                        
-                        echo "<table class = 'table table-respnosive-xl table-sm aligned-table table-light'>";
-                        echo "<th>". "Combo Details". "</th>";
-                        echo "<tr>";
-                        echo "<td class = 'fw-bold'>". "Combo Name: ".$comboName. "</td>";
-                        echo "</tr>"; 
-                        for($i = 0; $i < $comboLength; $i++){
-                            echo "<tr>";
-                            echo "<td class ='fw-bold'>". "Dish: ". $combo[$i]. "</td>";
-                            echo "</tr>";
-                        
-                            $contentQuery = "INSERT INTO combo_content (contentID, comboID, foodName) VALUES($contentid, $comboID, '$combo[$i]');";
-                            $result = mysqli_query($conn, $contentQuery);
-                            $contentid++;
-                        }   
-                        echo "</table>";
-                        echo "</div>";
-                    }
-                    echo "<div class = 'row d-flex justify-content-center'>";
-                        echo "<div class = 'col-12 d-flex justify-content-center mt-1'>";
-                            echo "<a href='main.php'>";
-                            echo "<button class = 'btn btn-primary p-2'>". "Back to Home". "</button>";
-                            echo "</a>";
-                        echo "</div>";
-                    echo "</div>";
-
-                    /*
-                    $query = "INSERT INTO food_combo (comboID, comboName, discount) VALUES($comboID, '$comboName', $discount);";
-                    $result = mysqli_query($conn, $query);
-                    echo "combo name: ".$comboName."<br>";
-                    for($i = 0; $i < $comboLength; $i++){
-                        echo "combo id: ".$comboID."<br>";
-                        echo "content id: ".$contentid."<br>";
-                        echo "dish: ".$combo[$i]."<br>";
-                        
-                        $contentQuery = "INSERT INTO combo_content (contentID, comboID, foodName) VALUES($contentid, $comboID, '$combo[$i]');";
-                        $result = mysqli_query($conn, $contentQuery);
-                        $contentid++;
-                    }
-                    */
-                    
-                
-                    /*
-                    $query = "UPDATE dish SET dishName = '$name', dishPrice = '$price', dishCategory = '$category' WHERE dishID = '$id'";
-                
-                    $result = mysqli_query($conn, $query);
-                
-                    // Check if the update was successful
-                    if ($result) {
-                        echo "Dish updated successfully with the following values: <br>.";
-                        echo "Dish Name: ".$name."<br>";
-                        echo "Dish Category: ".$category."<br>";
-                        echo "Dish Price: ".$price."<br>";
-
-                        echo '<a href="homePage.php">Home</a>';
-                    } else {
-                        echo "Error updating data: " . mysqli_error($conn);
+                        echo "<div class = 'row'>";
+                              echo "<div class = 'col-12 d-flex justify-content-center mb-5'>";
+                                  echo "<h1 class = 'display-1 text-center mt-5'>". "Combo Name Already Exists!". "</h1>";
+                              echo "</div>";
+                              echo "<div class = 'col-12 d-flex justify-content-center'>";
+                                  echo "<a href = 'addComboMeal.php'";
+                                      echo "<button class ='btn btn-primary'>". "Return to Add Combo Meal". "</button>";
+                                  echo "</a>";
+                                  echo "&nbsp";
+                                  echo "&nbsp";
+                                  echo "&nbsp";
+                                  echo "<a href = 'main.php'";
+                                      echo "<button class ='btn btn-primary'>". "Back to Home". "</button>";
+                                  echo "</a>";
+                              echo "</div>";
+                          echo "</div>";
                     }
                     
 
-                    */
                 }
                 ?>
 
