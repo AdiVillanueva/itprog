@@ -63,10 +63,6 @@
                             $combo[] = $dish['dishName'];
                         }
 
-                    /*
-                    for loop max value of combo ID then nested loop to check each dish and counter. if count == 3 then combo already exists 
-                    */    
-
                     $comboLength = count($combo);
 
                     // check if combo already exists
@@ -91,7 +87,7 @@
                         echo "</div>";
                     }
                     else{
-                        $query = "INSERT INTO food_combo (comboID, comboName, discount) VALUES($comboID, '$comboName', $discount);";
+                        $query = "INSERT INTO food_combo (comboID, comboName, discount, isActive) VALUES($comboID, '$comboName', $discount, 'Yes');";
                         $result = mysqli_query($conn, $query);
                         echo "<div class = 'col-12 mb-3 p-2 d-flex justify-content-center'>";
                         echo "<h1 class = 'display-4'>". "Combo Successfully Added!". "</h1>";

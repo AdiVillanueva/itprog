@@ -25,14 +25,17 @@
                         <?php
                             if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-                                $id = $_POST['dishID'];
-                                $name = $_POST['dishName'];
+                                $id = $_POST['comboID'];
+                                $name = $_POST['comboName'];
 
-                                $query = "DELETE FROM dish WHERE dishID = '$id'";
-                                $result = mysqli_query($conn, $query);
+                                $contentQuery = "DELETE FROM combo_content WHERE comboID = '$id'";
+                                $res = mysqli_query($conn, $contentQuery);
+
+                                $comboQuery = "DELETE FROM food_combo WHERE comboID = '$id'";
+                                $result = mysqli_query($conn, $comboQuery);
                             
-                                if ($result) {
-                                    echo "<h1 class = 'display-6 text-center '>". "Dish ". $name ." Successfully Deleted. </h1> <br>";
+                                if ($result && $res) {
+                                    echo "<h1 class = 'display-6 text-center '>". "Combo ". $name ." Successfully Deleted. </h1> <br>";
 
                                 } else {
                                     echo "Error updating data: " . mysqli_error($conn);
