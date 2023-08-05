@@ -1,13 +1,19 @@
 <?xml version="1.0"?>
 <dishes xsi="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="dishes.xsd">
 <dish>
-    <name>try</name>
+    <name>Burger</name>
     <category>Mains</category>
-    <price>70</price>
+    <price>350</price>
 </dish>
 
 <dish>
-    <name>catch</name>
+    <name>Bread Roll</name>
+    <category>Sides</category>
+    <price>120</price>
+</dish>
+
+<dish>
+    <name>Hot Choco</name>
     <category>Drinks</category>
     <price>70</price>
 </dish>
