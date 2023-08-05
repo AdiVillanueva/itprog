@@ -1,28 +1,50 @@
 <?xml version="1.0"?>
 <dishes xsi="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="dishes.xsd">
 <dish>
-    <name>Spaghetti</name>
+    <name>Salmon</name>
     <category>Mains</category>
-    <price>450</price>
+    <price>850</price>
 </dish>
 <dish>
     <name>Steak</name>
     <category>Mains</category>
-    <price>450</price>
+    <price>900</price>
 </dish>
 <dish>
-    <name>Lemonade</name>
-    <category>Drinks</category>
-    <price>100</price>
+    <name>Chicken</name>
+    <category>Mains</category>
+    <price>300</price>
 </dish>
+<dish>
+    <name>Baked Potato</name>
+    <category>Sides</category>
+    <price>80</price>
+</dish>
+<dish>
+    <name>Mashed Potato</name>
+    <category>Sides</category>
+    <price>75</price>
+</dish>
+
+<dish>
+    <name>Steamed Vegetables</name>
+    <category>Sides</category>
+    <price>50</price>
+</dish>
+
 <dish>
     <name>Iced Tea</name>
     <category>Drinks</category>
-    <price>100</price>
+    <price>55</price>
 </dish>
 <dish>
-    <name>Fries</name>
-    <category>Sides</category>
-    <price>200</price>
+    <name>Root Beer</name>
+    <category>Drinks</category>
+    <price>60</price>
+</dish>
+<dish>
+    <name>Water</name>
+    <category>Drinks</category>
+    <price>20</price>
 </dish>
 </dishes>

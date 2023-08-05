@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<dishes xsi="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="dishes.xsd">
+<dish>
+    <name>try</name>
+    <category>Mains</category>
+    <price>70</price>
+</dish>
+
+<dish>
+    <name>catch</name>
+    <category>Drinks</category>
+    <price>70</price>
+</dish>
+</dishes>
