@@ -118,7 +118,7 @@
                         <table class="table table-responsive-lg aligned-table delete-table">
                             <th class="bg-dark"> <h5 class = "text-light fw-bold">Drinks</h5></th>
                                 <?php
-                                    $dishQuery = mysqli_query($conn, "SELECT * FROM dish WHERE dishCategory = 'Sides'");
+                                    $dishQuery = mysqli_query($conn, "SELECT * FROM dish WHERE dishCategory = 'Drinks'");
 
 
                                     while ($dish = mysqli_fetch_assoc($dishQuery)) {

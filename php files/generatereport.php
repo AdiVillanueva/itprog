@@ -40,12 +40,25 @@
 			  $date = $_POST['date'];
 			  date_default_timezone_set('Asia/Manila');
 			  $timestamp = date("Y-m-d h:i:sa");
-
+          
 					$sql = "
-                    SELECT 	o.orderID ,SUM(o.totalPrice) as total_amount, SUM(o.discountedPrice) as total_discount, SUM(oi.quantity) as total_dishes
-                    FROM 	orders o		 		JOIN order_item oi					ON o.orderID=oi.orderID      
-                    WHERE 	 DATE(o.orderedAt) = '$date' 
-                    GROUP BY DATE(o.orderedAt);";
+              SELECT
+              SUM(total_amount) AS total_amount,
+              SUM(total_dishes) AS total_dishes
+              FROM
+              (
+                  SELECT
+                      o.orderID,
+                      SUM(o.totalPrice) AS total_amount,
+                      SUM(o.discountedPrice) AS total_discount,
+                      (SELECT SUM(quantity) FROM order_item oi WHERE oi.orderID = o.orderID) AS total_dishes
+                  FROM
+                      orders o
+                  WHERE
+                      DATE(o.orderedAt) = '$date'
+                  GROUP BY
+                      o.orderID
+              ) AS subquery;";
 
 					$records = mysqli_query($DBConnect, $sql) or die(mysqli_error($DBConnect));
 			
