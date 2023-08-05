@@ -43,9 +43,9 @@
           
 					$sql = "
                     SELECT
-                    SUM(total_amount) AS total_amount,
+                    FORMAT(SUM(total_amount), 2) AS total_amount,
                     SUM(total_dishes) AS total_dishes,
-                    SUM(total_discount) AS total_discount
+                    FORMAT(SUM(total_discount), 2) AS total_discount
                     FROM
                     (
                         SELECT
