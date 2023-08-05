@@ -53,6 +53,8 @@
         <div class="container d-flex justify-content-center">
             <div class="row">
                 <div class="col">
+                    <a href="deleteDish.php"><button class = "btn btn-primary p-2">Delete Another Dish</button></a>
+                    &nbsp &nbsp &nbsp
                     <a href="main.php"><button class = "btn btn-primary p-2">Back to Home</button></a>
 
                 </div>

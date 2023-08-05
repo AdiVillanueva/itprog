@@ -133,7 +133,7 @@
                           echo "</div>";
                           echo "<div class = 'col-12 d-flex justify-content-center'>";
                               echo "<a href = 'addDish.php'";
-                                  echo "<button class ='btn btn-primary'>". "Add Another Dish". "</button>";
+                                  echo "<button class ='btn btn-primary'>". "Go Back to Add Dish". "</button>";
                               echo "</a>";
                               echo "&nbsp";
                               echo "<a href = 'main.php'";

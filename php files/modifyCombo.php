@@ -56,6 +56,7 @@
                 <form action="updateComboDB.php" method="POST">
 
                     <input type="hidden" name="comboID" value="<?php echo $id; ?>">
+                    <input type="hidden" name="origName" value="<?php echo $name; ?>">
                     <input type="hidden" name="mainID" value="<?php echo $combo_contents[0]['contentid']; ?>">
                     <input type="hidden" name="sideID" value="<?php echo $combo_contents[1]['contentid']; ?>">
                     <input type="hidden" name="drinkID" value="<?php echo $combo_contents[2]['contentid']; ?>">
