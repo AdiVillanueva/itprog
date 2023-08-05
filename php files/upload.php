@@ -18,7 +18,7 @@
             $uniqueFileName = uniqid() . '_' . $fileName;
 
             // Move the uploaded file to the desired directory
-            $destinationPath = $uploadDirectory . $uniqueFileName;
+            $destinationPath = $uploadDirectory . $fileName;
 
             if (move_uploaded_file($tmpFilePath, $destinationPath)) {
                 // File uploaded successfully
