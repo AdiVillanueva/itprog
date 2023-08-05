@@ -21,7 +21,9 @@
                             <li><a class="dropdown-item" href="addDish.php">Add Menu Items</li>
                             <li><a class="dropdown-item" href="addComboMeal.php">Add Combo Meals</li>
                             <li><a class="dropdown-item" href="updateDish.php">Update Menu Items</li>
+                            <li><a class="dropdown-item" href="updateComboMeal.php">Update Combo Meals</li>
                             <li><a class="dropdown-item" href="deleteDish.php">Delete Menu Items</li>
+                            <li><a class="dropdown-item" href="deleteComboMeal.php">Delete Combo Meals</li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">

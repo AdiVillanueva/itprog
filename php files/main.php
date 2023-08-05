@@ -121,7 +121,7 @@
         <div class="table-responsive-lg">
             <table class="table aligned-table">
                 <thead>
-                    <tr class="table_title bg-dark"><td colspan="2"><h2 class=" text-light text-center fw-bold">Combo List</h2></td></tr>
+                    <tr class="table_title bg-dark"><td colspan="2"><h2 class=" text-light text-center fw-bold">Active Combo List</h2></td></tr>
                 </thead>
                 <tbody>
                     <tr>
@@ -129,7 +129,7 @@
                         <th>Discount</th>
                     </tr>
                     <?php
-                        $comboQuery = mysqli_query($DBConnect, "SELECT comboName, discount FROM food_combo ORDER BY comboID");
+                        $comboQuery = mysqli_query($DBConnect, "SELECT comboName, discount FROM food_combo WHERE isActive = 'Yes' ORDER BY comboID");
                         while($fetchCombo = mysqli_fetch_assoc($comboQuery)){
                             echo "<tr>";
                             echo "<td>". $fetchCombo['comboName']. "</td>";

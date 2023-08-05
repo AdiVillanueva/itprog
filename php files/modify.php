@@ -47,7 +47,7 @@
             </div>
 
             <div class = "container-lg mt-5 d-flex justify-content-center">
-                <form action="updateDB.php" method="POST" enctype="multipart/form-data">
+                <form action="updateDishDB.php" method="POST" enctype="multipart/form-data">
 
                     <input type="hidden" name="dishID" value="<?php echo $id; ?>">
 

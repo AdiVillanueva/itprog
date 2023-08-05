@@ -37,10 +37,11 @@
                     if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         $id = $_POST['dishID'];
                         $name = $_POST['dishName'];
-                        echo "<p class = 'fw-bold'>". "Delete dish ".$name." ? </p>";
+                        echo "<p class = 'fw-bold'>". "Delete dish ".$name." ? <br>
+                        The combo meals associated with this dish will be set to inactive. </p>";
 
                         echo '
-                            <form action="deleteDB.php" method="POST">
+                            <form action="deleteDishDB.php" method="POST">
                                 <input type="hidden" name="dishID" value="'.$id.'">
                                 <input type="hidden" name="dishName" value="'.$name.'">
                                 <input style = "width: 5%;" class = "btn btn-primary m-2 p-2" type="submit" value="Yes">

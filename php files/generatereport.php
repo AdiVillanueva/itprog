@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
     require("connect.php");
     session_start();
@@ -8,6 +7,7 @@
         $userName = $_SESSION["getLogin"];
 
 ?>
+<!DOCTYPE html>
 <html>
     <?php include("navbar.php");?>
 <head>
@@ -42,54 +42,65 @@
 			  $timestamp = date("Y-m-d h:i:sa");
           
 					$sql = "
-              SELECT
-              SUM(total_amount) AS total_amount,
-              SUM(total_dishes) AS total_dishes
-              FROM
-              (
-                  SELECT
-                      o.orderID,
-                      SUM(o.totalPrice) AS total_amount,
-                      SUM(o.discountedPrice) AS total_discount,
-                      (SELECT SUM(quantity) FROM order_item oi WHERE oi.orderID = o.orderID) AS total_dishes
-                  FROM
-                      orders o
-                  WHERE
-                      DATE(o.orderedAt) = '$date'
-                  GROUP BY
-                      o.orderID
-              ) AS subquery;";
+                    SELECT
+                    SUM(total_amount) AS total_amount,
+                    SUM(total_dishes) AS total_dishes,
+                    SUM(total_discount) AS total_discount
+                    FROM
+                    (
+                        SELECT
+                        o.orderID,
+                        SUM(o.totalPrice) AS total_amount,
+                        SUM(o.discountedPrice) AS total_discount,
+                        (SELECT SUM(quantity) FROM order_item oi WHERE oi.orderID = o.orderID) AS total_dishes
+                         FROM
+                         orders o
+                         WHERE
+                         DATE(o.orderedAt) = '$date'
+                         GROUP BY
+                         o.orderID
+                    ) AS subquery;";
 
 					$records = mysqli_query($DBConnect, $sql) or die(mysqli_error($DBConnect));
+
+                    while($results = mysqli_fetch_array($records))
+					{
+                        $total_amount = $results['total_amount']; 
+
+                        if(isset($results['total_discount'])){
+                            $total_discount = $results['total_discount'];
+                        }
+                        else{
+                            $total_discount = 0;
+                        }
+                        
+                        $total_dishes = $results['total_dishes'];
+                    }
 			
 					
 	?>
 
         <?php
-            if (mysqli_num_rows($records) != 0) {
+            if (isset($total_amount)) {
         ?>
             <div class="container-lg mt-5">
                 <table class="table-responsive-lg table aligned-table">
                 <thead>
                     <tr class="table_title bg-dark"><td colspan="2"><h2 class=" text-light text-center fw-bold">Report for <?php echo "$date";?></h2></td></tr>
                 </thead>
-					<?php
-
-					while($results = mysqli_fetch_array($records))
-					{
-				?>
 
                     <tr>
-                        <th>Total Amount</th>
-                        <td ><?php echo $results['total_amount']; ?></td>
+                        <td>Total Amount</td>
+                        <td ><?php echo $total_amount; ?></td>
                     </tr>
                     <tr>
-                        <th>Total Discount</th>
-                        <td ><?php echo $results['total_discount']; ?></td>
+                        <td>Total Discount</td>
+                        <td ><?php echo $total_discount; ?></td>
+                      
                     </tr>
                     <tr>
-                        <th>Total Dishes Sold</th>
-                        <td ><?php echo $results['total_dishes']; ?></td>
+                        <td>Total Dishes Sold</td>
+                        <td ><?php echo $total_dishes; ?></td>
                     </tr>
                    
 				<?php
@@ -102,15 +113,14 @@
                 }
                         $filename = 'report_'.$date;
                         $path = $folderPath . "/" . $filename;
-						$reports = new SimpleXMLElement('<reports></reports>');
+						$reports = new SimpleXMLElement('<report></report>');
                 
-                        $report = $reports->addChild("dish");
-                        $report->addChild('total_amount', $results['total_amount']);
-                        $report->addChild('total_discount', $results['total_discount']);
-                        $report->addChild('total_dishes', $results['total_dishes']);
+                        $reports->addChild('total_amount', $total_amount);
+                        $reports->addChild('total_discount', $total_discount);
+                        $reports->addChild('total_dishes', $total_dishes);
                         $reports->asXML($path);
                 
-					}
+					
 
                     
             

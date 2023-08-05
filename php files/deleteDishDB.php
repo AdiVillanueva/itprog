@@ -30,8 +30,16 @@
 
                                 $query = "DELETE FROM dish WHERE dishID = '$id'";
                                 $result = mysqli_query($conn, $query);
+
+                                $updateQuery = "UPDATE food_combo fc
+                                                INNER JOIN combo_content cc ON cc.comboID = fc.comboID
+                                                SET fc.isActive = 'No'
+                                                WHERE cc.foodName = '$name'
+                                                AND   fc.isActive = 'Yes'";
+                                $res = mysqli_query($conn, $updateQuery);
+
                             
-                                if ($result) {
+                                if ($result && $res) {
                                     echo "<h1 class = 'display-6 text-center '>". "Dish ". $name ." Successfully Deleted. </h1> <br>";
 
                                 } else {
@@ -45,6 +53,8 @@
         <div class="container d-flex justify-content-center">
             <div class="row">
                 <div class="col">
+                    <a href="deleteDish.php"><button class = "btn btn-primary p-2">Delete Another Dish</button></a>
+                    &nbsp &nbsp &nbsp
                     <a href="main.php"><button class = "btn btn-primary p-2">Back to Home</button></a>
 
                 </div>
