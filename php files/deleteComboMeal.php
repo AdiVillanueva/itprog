@@ -52,7 +52,7 @@
                                 <input type="hidden" name="comboID" value="'.$id.'">
                                 <input type="hidden" name="comboName" value="'.$name.'">';
 
-                                echo "<div class = 'col-12 col-md-3  p-2 d-flex justify-content-center'>";
+                                echo "<div class = 'container-lg col-12 col-md-3  p-2 d-flex justify-content-center'>";
                         
                                 echo "<table class = 'table table-respnosive-xl table-sm aligned-table table-light'>";
                                 echo "<th>". "Combo Details". "</th>";

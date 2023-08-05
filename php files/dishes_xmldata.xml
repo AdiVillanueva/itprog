@@ -1,2 +1,28 @@
 <?xml version="1.0"?>
-<dishes xsi="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="dishes.xsd"></dishes>
+<dishes xsi="http://www.w3.org/2001/XMLSchema-instance" noNamespaceSchemaLocation="dishes.xsd">
+<dish>
+    <name>Spaghetti</name>
+    <category>Mains</category>
+    <price>450</price>
+</dish>
+<dish>
+    <name>Steak</name>
+    <category>Mains</category>
+    <price>450</price>
+</dish>
+<dish>
+    <name>Lemonade</name>
+    <category>Drinks</category>
+    <price>100</price>
+</dish>
+<dish>
+    <name>Iced Tea</name>
+    <category>Drinks</category>
+    <price>100</price>
+</dish>
+<dish>
+    <name>Fries</name>
+    <category>Sides</category>
+    <price>200</price>
+</dish>
+</dishes>
